@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
-using System.Runtime.Remoting;
 using Atea;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,6 +20,7 @@ namespace FileRepositoryTests
             IFileRepository repository = new FileRepository(new Logger(), "AA", null);
             var result = repository.WriteToFile(1, "abc");
             Assert.IsTrue(result.Success);
+            Assert.AreEqual(1,result.Id);
             //test cleanup
             repository.DeleteFile(1);
         }

@@ -5,6 +5,10 @@ namespace Atea
 {
     public class FileRepository : IFileRepository
     {
+        private readonly string _workingDirectory;
+        private readonly ILogger _logger;
+        private readonly string _fileType;
+
         /// <summary>
         /// 
         /// </summary>
@@ -27,9 +31,7 @@ namespace Atea
             _logger = logger;
             _fileType = string.IsNullOrEmpty(fileType) ? "txt" : fileType;
         }
-        private readonly string _workingDirectory;
-        private readonly ILogger _logger;
-        private readonly string _fileType;
+
         public OperationResult WriteToFile(int id, string message)
         {
             _logger.LogInformation($"Writing to file: {GetFileFullPath(id)}");
