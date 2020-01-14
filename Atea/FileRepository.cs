@@ -34,6 +34,11 @@ namespace Atea
 
         public OperationResult WriteToFile(int id, string message)
         {
+            if (File.Exists(GetFileFullPath(id)))
+            {
+                throw new InvalidOperationException($"file {GetFileFullPath(id)} already exists. update intended?");
+            }
+
             _logger.LogInformation($"Writing to file: {GetFileFullPath(id)}");
             File.WriteAllText(GetFileFullPath(id), message);
             return new OperationResult(true, id);

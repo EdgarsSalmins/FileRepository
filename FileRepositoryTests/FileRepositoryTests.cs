@@ -24,7 +24,18 @@ namespace FileRepositoryTests
             //test cleanup
             repository.DeleteFile(1);
         }
-        
+
+        [TestMethod]
+        public void WriteExistingFileTest()
+        {
+            IFileRepository repository = new FileRepository(new Logger(), "AA", null);
+            var result = repository.WriteToFile(1, "abc");
+            Assert.IsTrue(result.Success);
+            Assert.ThrowsException<InvalidOperationException>(() =>repository.WriteToFile(1, "kkk"));
+            //test cleanup
+            repository.DeleteFile(1);
+        }
+
         [TestMethod]
         public void ReadFileTest()
         {
